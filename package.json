@@ -1,0 +1,8 @@
+{
+	"name": "panzerweb"
+  , "version": "0.0.1"
+  , "engines" : [ "node >=0.4" ]
+  , "dependencies": {
+	"connect": "1"
+  }
+}

@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+<head>
+	<script type='text/javascript' src='js/js-injector/injector.js'></script>
+	<script type='text/javascript'>
+		window.onload = function () {
+			var a = document.getElementById('gama');
+			a.href = makeInject('PANZERWEB', function(err,scope){
+					scope.log('inject!: ' + err);
+					if(!err){
+						scope.include(scope.href+'js/loader.js');
+					};
+				});
+		};
+	</script>
+</head>
+<body>
+	<a id="gama" href="">gama</a>
+</body>
+</html>
