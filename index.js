@@ -23,8 +23,12 @@ var c = connect.createServer(
 					res.end('(function(w,s){s.load(\''+ fname.replace(/.js/, '') +'\',null,\''+JSON.stringify(o)+'\');})(window, PANZERWEB);');
 				}
 			});
-
+			
+			app.get('/api/ping/get/:fname', function(req, res) {
+				res.setHeader('Content-type', 'text/javascript');
+				res.end('(function(w,s){s.load(\''+ req.params.fname +'\',null,\'pong\');})(window, PANZERWEB);');
+			});
 	})
 );
 
-c.listen(8000);
+c.listen(7654);

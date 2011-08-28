@@ -8,7 +8,7 @@
 			a.href = makeInject('PANZERWEB', function(err,scope){
 					scope.log('inject!: ' + err);
 					if(!err){
-						scope.include(scope.href+'js/loader.js');
+						scope.include(scope.href+'js/loader.js', 'js');
 					};
 				});
 		};
