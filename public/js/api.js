@@ -5,7 +5,7 @@
 	//Request
 	function request(o, m, p, fn) {
 		var fname = Date.now()
-			, url = scope.href + 'api/' + o + '/' + m + '/' + fname
+			, url = scope.href + 'api/' + o + '/' + m + '/r' + fname
 			, ps = ''
 			;
 			
@@ -16,7 +16,13 @@
 		
 		if (ps) url += '?' + ps;
 		
-		scope.include(url, 'js', fn);
+		scope.include(url, 'js', function (err, data) {
+			fn(err, data);
+			
+			//remove
+			var el = document.getElementById(fname);
+			if (el) el.parentNode.removeChild(el);
+		});
 	}
 	
 	//Ping
