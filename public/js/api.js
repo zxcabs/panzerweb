@@ -4,8 +4,8 @@
 	
 	//Request
 	function request(o, m, p, fn) {
-		var fname = Date.now()
-			, url = scope.href + 'api/' + o + '/' + m + '/r' + fname
+		var fname = 'r' + Date.now()
+			, url = scope.href + 'api/' + o + '/' + m + '/' + fname
 			, ps = ''
 			;
 			
