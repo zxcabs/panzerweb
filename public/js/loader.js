@@ -2,7 +2,7 @@
 (function (window, scope) {
 		var app = scope.app = {
 				  DEBUG: true
-				, PING_INTERVAL: 50
+				, PING_INTERVAL: 1000
 			};
 		
 		function loadApi(fn) {
