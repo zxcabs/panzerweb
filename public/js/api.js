@@ -1,11 +1,11 @@
 // panzerweb api
-(function (w, scopre, app){
+(function (w, scope, app){
 	app.api = {};
 	
 	//Request
 	function request(o, m, p, fn) {
 		var fname = Date.now()
-			, url = scope.href + o + '/' + m + '/' + fname
+			, url = scope.href + 'api/' + o + '/' + m + '/' + fname
 			, ps = ''
 			;
 			
@@ -21,7 +21,13 @@
 	
 	//Ping
 	function ping(fn) {
-		request('ping', 'get', {}, fn);
+		var start = Date.now();
+		request('ping', 'get', {}, function() {
+			fn(null, Date.now() - start);
+		});
 	}
 	
+	app.api.ping = ping;
+	
+	scope.load('api.js');
 })(window, window.PANZERWEB, window.PANZERWEB.app);
