@@ -16,11 +16,10 @@
 		
 		if (ps) url += '?' + ps;
 		
-		scope.include(url, 'js', function (err, data) {
+		var el = scope.include(url, 'js', function (err, data) {
 			fn(err, data);
 			
 			//remove
-			var el = document.getElementById(fname);
 			if (el) el.parentNode.removeChild(el);
 		});
 	}
@@ -35,5 +34,5 @@
 	
 	app.api.ping = ping;
 	
-	scope.load('api.js');
+	scope.return = app.api;
 })(window, window.PANZERWEB, window.PANZERWEB.app);

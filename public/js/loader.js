@@ -16,7 +16,7 @@
 			});
 		}
 		
-		loadApi(function(err){
+		loadApi(function(err, api){
 			if(err) {
 				scope.error(err);
 			} else {

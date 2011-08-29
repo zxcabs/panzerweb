@@ -26,7 +26,7 @@ var c = connect.createServer(
 			
 			app.get('/api/ping/get/:fname', function(req, res) {
 				res.setHeader('Content-type', 'text/javascript');
-				res.end('(function(w,s){s.load(\''+ req.params.fname +'\',null,\'pong\');})(window, PANZERWEB);');
+				res.end('(function(w,s){s.return=\'pong\';})(window, PANZERWEB);');
 			});
 	})
 );
