@@ -1,21 +1,38 @@
 // panzerweb api
 (function (w, scope, app){
-	app.api = {};
+	var api = app.api = {};
 	
 	//Request
-	function request(o, m, p, fn) {
-		var fname = 'r' + Date.now()
-			, url = scope.href + 'api/' + o + '/' + m + '/' + fname
-			, ps = ''
-			;
-			
-		for (var i in p){
-			if (ps) ps += '&';
-			ps += i + '=' + p[i];
+	function request() {
+		var c, m, p, fn;
+		
+		switch (arguments.length) {
+			case 2:
+				c = arguments[0];
+				m = 'get';
+				fn = arguments[1];
+				break;
+			case 3:
+				c = arguments[0];
+				m = 'get';
+				p =  arguments[1];
+				fn = arguments[2];
+				break;
+			case 4:
+				c = arguments[0];
+				m = arguments[1]
+				p = arguments[2];
+				fn = arguments[3];
+				break;
+			default: 
+				scope.error('Wrong function "request" param');
+				return;
 		};
 		
-		if (ps) url += '?' + ps;
-		
+		var fname = 'r' + Date.now()
+			, url = scope.href + 'api/' + c + '/' + m + '/' + fname + ((p)? '?data=' + JSON.stringify(p): '')
+			;
+				
 		var el = scope.include(url, 'js', function (err, data) {
 			fn(err, data);
 			
@@ -23,16 +40,23 @@
 			if (el) el.parentNode.removeChild(el);
 		});
 	}
+	api.request = request;
+	
 	
 	//Ping
 	function ping(fn) {
 		var start = Date.now();
-		request('ping', 'get', {}, function() {
+		request('ping', function() {
 			fn(null, Date.now() - start);
 		});
-	}
+	};
+	api.ping = ping;
 	
-	app.api.ping = ping;
+	//Echo
+	function echo(o, fn) {
+		request('echo', o, fn);
+	};
+	api.echo = echo;
 	
-	scope.return = app.api;
+	scope.return = api;
 })(window, window.PANZERWEB, window.PANZERWEB.app);

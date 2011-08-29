@@ -1,7 +1,8 @@
 var connect = require('connect');
 
 var c = connect.createServer(
-	  connect.static(__dirname + '/public', { maxAge: 0 })
+	  connect.query()
+	, connect.static(__dirname + '/public', { maxAge: 0 })
 	, connect.router(function(app){
 			//create session
 			app.get('/api/session/:fname', function(req, res){
@@ -27,6 +28,12 @@ var c = connect.createServer(
 			app.get('/api/ping/get/:fname', function(req, res) {
 				res.setHeader('Content-type', 'text/javascript');
 				res.end('(function(w,s){s.return=\'pong\';})(window, PANZERWEB);');
+			});
+			
+			app.get('/api/echo/get/:fname', function (req, res) {
+				var str = ('string' === typeof req.query.data)? req.query.data: JSON.stringify(req.query.data).replace(/^"|"$/g, '');
+				res.setHeader('Content-type', 'text/javascript');
+				res.end('(function(w,s){s.return='+ str +';})(window, PANZERWEB);');				
 			});
 	})
 );

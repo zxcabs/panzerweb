@@ -21,7 +21,7 @@
 				scope.error(err);
 			} else {
 				scope.log('go go!');
-				ping();			
+				//ping();			
 			};
 		});
 })(window, PANZERWEB);
