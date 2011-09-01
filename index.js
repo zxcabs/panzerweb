@@ -47,7 +47,7 @@ var c = connect.createServer(
 function Test() {
 	this.width  = 800;
 	this.height = 600;
-	this.point  = {x: 0, y: 0, dx: -1, dy: -2};
+	this.point  = {x: 0, y: 0, dx: 1, dy: 2};
 	this._lastTime = Date.now();
 	this._interval = 100;
 		
@@ -81,7 +81,7 @@ Test.prototype.run = function () {
 Test.prototype.tick = function (dt) {
 	var p = this.point;
 	
-	p.x += p.dt;
+	p.x += p.dx;
 	p.y += p.dy;
 	
 	if (p.x > this.width) {

@@ -52,6 +52,14 @@
 	};
 	api.ping = ping;
 	
+	//Point
+	function point(fn) {
+		var start = Date.now();
+		request('point', fn);
+	};
+	api.point = point;
+	
+	
 	//Echo
 	function echo(o, fn) {
 		request('echo', o, fn);
