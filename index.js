@@ -37,7 +37,7 @@ var c = connect.createServer(
 			});
 			
 			app.get('/api/point/get/:fname', function (req, res) {
-				var str = JSON.stringify(test.point).replace(/^"|"$/g, '');
+				var str = '{x:' + test.point.x +',y:' + test.point.y +'};';
 				res.setHeader('Content-type', 'text/javascript');
 				res.end('(function(w,s){s.return='+ str +';})(window, PANZERWEB);');
 			});
@@ -47,7 +47,7 @@ var c = connect.createServer(
 function Test() {
 	this.width  = 800;
 	this.height = 600;
-	this.point  = {x: 0, y: 0, dx: 1, dy: 2};
+	this.point  = {x: 0, y: 0, dx: 5, dy: 10};
 	this._lastTime = Date.now();
 	this._interval = 100;
 		
